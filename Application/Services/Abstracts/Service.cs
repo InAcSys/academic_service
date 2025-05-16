@@ -10,7 +10,7 @@ namespace AcademicService.Application.Services.Abstracts
     {
         protected readonly IRepository<T, TKey> _repository = repository;
 
-        public async Task<T> Create(T entity)
+        public async Task<T?> Create(T entity)
         {
             var result = await _repository.Create(entity);
             return result;

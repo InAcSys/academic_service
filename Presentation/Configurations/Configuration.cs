@@ -5,6 +5,7 @@ using AcademicService.Domain.Entities.Concretes;
 using AcademicService.Infrastructure.Contexts;
 using AcademicService.Infrastructure.Repositories.Concretes;
 using AcademicService.Infrastructure.Repositories.Interfaces;
+using AcademicService.Presentation.Profiles;
 using Microsoft.EntityFrameworkCore;
 
 namespace AcademicService.Presentation.Configurations
@@ -44,6 +45,8 @@ namespace AcademicService.Presentation.Configurations
             services.AddScoped<IRepository<Country, int>, CountryRepository>();
             services.AddScoped<IRepository<Departament, int>, DepartamentRepository>();
             services.AddScoped<IRepository<City, int>, CityRepository>();
+
+            services.AddAutoMapper(typeof(InstituteProfile));
 
             return services;
         }
