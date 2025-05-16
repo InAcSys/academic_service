@@ -32,7 +32,6 @@ namespace AcademicService.Presentation.Configurations
             services.AddScoped<IService<InstituteType, int>, TypeService>();
             services.AddScoped<IService<Nature, int>, NatureService>();
             services.AddScoped<IService<Period, int>, PeriodService>();
-            services.AddScoped<IService<MiddleVacation, int>, MiddleVacationService>();
             services.AddScoped<IService<Country, int>, CountryService>();
             services.AddScoped<IService<Departament, int>, DepartamentService>();
             services.AddScoped<IService<City, int>, CityService>();
@@ -41,7 +40,6 @@ namespace AcademicService.Presentation.Configurations
             services.AddScoped<IRepository<InstituteType, int>, TypeRepository>();
             services.AddScoped<IRepository<Nature, int>, NatureRepository>();
             services.AddScoped<IRepository<Period, int>, PeriodRepository>();
-            services.AddScoped<IRepository<MiddleVacation, int>, MiddleVacationRepository>();
             services.AddScoped<IRepository<Country, int>, CountryRepository>();
             services.AddScoped<IRepository<Departament, int>, DepartamentRepository>();
             services.AddScoped<IRepository<City, int>, CityRepository>();

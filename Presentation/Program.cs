@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using AcademicService.Presentation.Configurations;
 using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.WebHost.ConfigureKestrel(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddConfiguration();
 builder.Services.AddControllers()
         .AddJsonOptions(options =>
         {

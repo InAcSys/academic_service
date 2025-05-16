@@ -13,7 +13,6 @@ namespace AcademicService.Domain.DTOs.Institute
         public int? City { get; set; }
         public string? Location { get; set; } = "";
         public string? Logo { get; set; } = "";
-        public int? MiddleVacations { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
     }

@@ -12,6 +12,5 @@ namespace AcademicService.Infrastructure.Contexts
         public DbSet<Country> Countries { get; set; }
         public DbSet<Departament> Departaments { get; set; }
         public DbSet<City> Cities { get; set; }
-        public DbSet<MiddleVacation> MiddleVacations { get; set; }
     }
 }
