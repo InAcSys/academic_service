@@ -5,8 +5,8 @@ using AcademicService.Infrastructure.Repositories.Interfaces;
 namespace AcademicService.Application.Services.Concretes
 {
     public class CityService(
-        IRepository<City, int> repository
-    ) : Service<City, int>(repository)
+        IChildRepository<City, int, int> repository
+    ) : AbstractChildService<City, int, int>(repository)
     {
         
     }

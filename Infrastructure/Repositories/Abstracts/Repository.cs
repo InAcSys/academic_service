@@ -8,14 +8,14 @@ namespace AcademicService.Infrastructure.Repositories.Abstracts
     {
         protected readonly DbContext _context = context;
 
-        public async Task<T?> Create(T entity)
+        public virtual async Task<T?> Create(T entity)
         {
             var result = await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
             return result.Entity;
         }
 
-        public async Task<bool> Delete(TKey id)
+        public virtual async Task<bool> Delete(TKey id)
         {
             var entity = await GetById(id);
             if (entity is null)
@@ -28,7 +28,7 @@ namespace AcademicService.Infrastructure.Repositories.Abstracts
             return result is not null;
         }
 
-        public async Task<IEnumerable<T>> GetAll(int pageNumber, int pageSize)
+        public virtual async Task<IEnumerable<T>> GetAll(int pageNumber, int pageSize)
         {
             if (pageNumber < 1)
             {
@@ -52,7 +52,7 @@ namespace AcademicService.Infrastructure.Repositories.Abstracts
             return entities;
         }
 
-        public async Task<T?> GetById(TKey id)
+        public virtual async Task<T?> GetById(TKey id)
         {
             if (EqualityComparer<TKey>.Default.Equals(id, default))
             {
@@ -71,7 +71,7 @@ namespace AcademicService.Infrastructure.Repositories.Abstracts
             return entity;
         }
 
-        public async Task<T> Update(TKey id, T entity)
+        public virtual async Task<T> Update(TKey id, T entity)
         {
             if (EqualityComparer<TKey>.Default.Equals(id, default))
             {

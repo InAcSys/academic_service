@@ -5,9 +5,9 @@ using AcademicService.Infrastructure.Repositories.Interfaces;
 namespace AcademicService.Application.Services.Concretes
 {
     public class DepartamentService(
-        IRepository<Departament, int> repository
-    ) : Service<Departament, int>(repository)
+        IChildRepository<Departament, int, int> repository
+    ) : AbstractChildService<Departament, int, int>(repository)
     {
-        
+
     }
 }

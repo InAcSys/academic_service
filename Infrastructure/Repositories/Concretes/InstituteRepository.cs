@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AcademicService.Infrastructure.Repositories.Concretes
 {
-    public class InstituteRepository(DbContext context) : Repository<Institute, Guid>(context)
+    public class InstituteRepository(DbContext context) : AbstractInstituteRepository(context)
     {
 
     }

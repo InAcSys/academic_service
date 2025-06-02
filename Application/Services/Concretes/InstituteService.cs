@@ -5,8 +5,8 @@ using AcademicService.Infrastructure.Repositories.Interfaces;
 namespace AcademicService.Application.Services.Concretes
 {
     public class InstituteService(
-        IRepository<Institute, Guid> repository
-    ) : Service<Institute, Guid>(repository)
+        IInstituteRepository repository
+    ) : AbstractInstituteService(repository)
     {
 
     }

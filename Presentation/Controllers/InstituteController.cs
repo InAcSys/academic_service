@@ -8,11 +8,11 @@ namespace AcademicService.Presentation.Controllers
 {
     [ApiController, Route("api/[controller]")]
     public class InstituteController(
-        IService<Institute, Guid> service,
+        IInstituteService service,
         IMapper mapper
     ) : ControllerBase
     {
-        private readonly IService<Institute, Guid> _service = service;
+        private readonly IInstituteService _service = service;
         private readonly IMapper _mapper = mapper;
 
         [HttpGet]
@@ -26,7 +26,7 @@ namespace AcademicService.Presentation.Controllers
         }
 
         [HttpGet("id/{id}")]
-        public async Task<IActionResult> GetById([FromHeader] Guid id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var institute = await _service.GetById(id);
             if (institute is null)
@@ -49,7 +49,7 @@ namespace AcademicService.Presentation.Controllers
         }
 
         [HttpPut("id/{id}")]
-        public async Task<IActionResult> Update([FromHeader] Guid id, [FromBody] UpdateInstituteDTO institute)
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateInstituteDTO institute)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace AcademicService.Presentation.Controllers
         }
 
         [HttpDelete("id/{id}")]
-        public async Task<IActionResult> Delete([FromHeader] Guid id)
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var result = await _service.Delete(id);
             if (!result)
@@ -72,6 +72,24 @@ namespace AcademicService.Presentation.Controllers
                 return BadRequest("The entity could not be eliminated");
             }
             return Ok("Was deleted!");
+        }
+
+        [HttpPost("assign-principal/id/{id}")]
+        public async Task<IActionResult> AssignPrincipal([FromRoute] Guid id, [FromBody] AssignPrincipalDTO principalDTO)
+        {
+            var result = await _service.AssignPrincipal(id, principalDTO.Principal);
+            if (!result)
+            {
+                return BadRequest("It was not possible to assign the director");
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("verify-subdomain")]
+        public async Task<IActionResult> VerifySUbDomain([FromQuery] string subDomain)
+        {
+            var result = await _service.VerifySubDomainIsUnique(subDomain);
+            return Ok(result);
         }
     }
 }

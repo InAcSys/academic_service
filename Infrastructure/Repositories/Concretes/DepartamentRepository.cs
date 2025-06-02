@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AcademicService.Infrastructure.Repositories.Concretes
 {
-    public class DepartamentRepository(DbContext context) : Repository<Departament, int>(context)
+    public class DepartamentRepository(DbContext context) : AbstractChildRepository<Departament, int, int>(context)
     {
         
     }

@@ -11,8 +11,7 @@ namespace AcademicService.Domain.DTOs.Institute
         public int Departament { get; set;}
         public int City { get; set; }
         public string Location { get; set; } = "";
-        public string Logo { get; set; } = "";
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateOnly StartTime { get; set; }
+        public DateOnly EndTime { get; set; }
     }
 }

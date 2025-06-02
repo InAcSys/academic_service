@@ -28,21 +28,21 @@ namespace AcademicService.Presentation.Configurations
                 )
             );
 
-            services.AddScoped<IService<Institute, Guid>, InstituteService>();
+            services.AddScoped<IInstituteService, InstituteService>();
             services.AddScoped<IService<InstituteType, int>, TypeService>();
             services.AddScoped<IService<Nature, int>, NatureService>();
             services.AddScoped<IService<Period, int>, PeriodService>();
             services.AddScoped<IService<Country, int>, CountryService>();
-            services.AddScoped<IService<Departament, int>, DepartamentService>();
-            services.AddScoped<IService<City, int>, CityService>();
+            services.AddScoped<IChildService<Departament, int, int>, DepartamentService>();
+            services.AddScoped<IChildService<City, int, int>, CityService>();
 
-            services.AddScoped<IRepository<Institute, Guid>, InstituteRepository>();
+            services.AddScoped<IInstituteRepository, InstituteRepository>();
             services.AddScoped<IRepository<InstituteType, int>, TypeRepository>();
             services.AddScoped<IRepository<Nature, int>, NatureRepository>();
             services.AddScoped<IRepository<Period, int>, PeriodRepository>();
             services.AddScoped<IRepository<Country, int>, CountryRepository>();
-            services.AddScoped<IRepository<Departament, int>, DepartamentRepository>();
-            services.AddScoped<IRepository<City, int>, CityRepository>();
+            services.AddScoped<IChildRepository<Departament, int, int>, DepartamentRepository>();
+            services.AddScoped<IChildRepository<City, int, int>, CityRepository>();
 
             services.AddAutoMapper(typeof(InstituteProfile));
 

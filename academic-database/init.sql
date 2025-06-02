@@ -44,24 +44,24 @@ CREATE TABLE
     IF NOT EXISTS "Departaments" (
         "Id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         "Name" VARCHAR(100) NOT NULL UNIQUE,
-        "Country" INT NOT NULL,
+        "ParentId" INT NOT NULL,
         "IsActive" BOOLEAN NOT NULL DEFAULT TRUE,
         "Created" TIMESTAMP NOT NULL DEFAULT NOW (),
         "Updated" TIMESTAMP NULL,
         "Deleted" TIMESTAMP NULL,
-        FOREIGN KEY ("Country") REFERENCES "Countries" ("Id")
+        FOREIGN KEY ("ParentId") REFERENCES "Countries" ("Id")
     );
 
 CREATE TABLE
     IF NOT EXISTS "Cities" (
         "Id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         "Name" VARCHAR(100) NOT NULL UNIQUE,
-        "Departament" INT NOT NULL,
+        "ParentId" INT NOT NULL,
         "IsActive" BOOLEAN NOT NULL DEFAULT TRUE,
         "Created" TIMESTAMP NOT NULL DEFAULT NOW (),
         "Updated" TIMESTAMP NULL,
         "Deleted" TIMESTAMP NULL,
-        FOREIGN KEY ("Departament") REFERENCES "Departaments" ("Id")
+        FOREIGN KEY ("ParentId") REFERENCES "Departaments" ("Id")
     );
 
 CREATE TABLE
@@ -72,15 +72,15 @@ CREATE TABLE
         "Type" INT NOT NULL,
         "Nature" INT NOT NULL,
         "Period" INT NOT NULL,
-        "SubDomain" VARCHAR(255) NOT NULL,
+        "SubDomain" VARCHAR(255) NOT NULL UNIQUE,
         "Country" INT NOT NULL,
         "Departament" INT NOT NULL,
         "City" INT NOT NULL,
         "Location" VARCHAR(255) NOT NULL,
-        "Logo" VARCHAR(255) NOT NULL,
+        "Logo" VARCHAR(255) NULL,
         "MiddleVacations" INT NULL,
-        "StartTime" TIMESTAMP NOT NULL,
-        "EndTime" TIMESTAMP NOT NULL,
+        "StartTime" DATE NOT NULL,
+        "EndTime" DATE NOT NULL,
         "IsActive" BOOLEAN NOT NULL DEFAULT TRUE,
         "Created" TIMESTAMP NOT NULL DEFAULT NOW (),
         "Updated" TIMESTAMP NULL,
@@ -96,7 +96,7 @@ CREATE TABLE
 INSERT INTO
     "Types" ("Name")
 VALUES
-    ('Universidad'),
+    ('Universidad/Facultad Universitaria'),
     ('Colegio'),
     ('Instituto alternativo'),
     ('Instituto de idiomas');
@@ -121,7 +121,7 @@ VALUES
     ('Bolivia', '+591');
 
 INSERT INTO
-    "Departaments" ("Name", "Country")
+    "Departaments" ("Name", "ParentId")
 VALUES
     ('La Paz', 1),
     ('Cochabamba', 1),
@@ -134,7 +134,7 @@ VALUES
     ('Pando', 1);
 
 INSERT INTO
-    "Cities" ("Name", "Departament")
+    "Cities" ("Name", "ParentId")
 VALUES
     -- La Paz
     ('La Paz', 1),
