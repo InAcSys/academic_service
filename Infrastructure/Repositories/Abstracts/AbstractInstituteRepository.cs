@@ -4,15 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AcademicService.Infrastructure.Repositories.Abstracts
 {
-    public abstract class AbstractInstituteRepository(
-        DbContext context
-    ) : Repository<Institute, Guid>(context), IInstituteRepository
+    public abstract class AbstractInstituteRepository(DbContext context)
+        : Repository<Institute, Guid>(context),
+            IInstituteRepository
     {
         public override Task<Institute?> Create(Institute entity)
         {
             entity.SubDomain = entity.SubDomain.ToLower();
             return base.Create(entity);
         }
+
         public async Task<bool> AssignPrincipal(Guid id, Guid principalId)
         {
             var institute = await GetById(id);

@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AcademicService.Infrastructure.Repositories.Abstracts
 {
-    public abstract class Repository<T, TKey>(DbContext context) : IRepository<T, TKey> where T : Entity<TKey>
+    public abstract class Repository<T, TKey>(DbContext context) : IRepository<T, TKey>
+        where T : Entity<TKey>
     {
         protected readonly DbContext _context = context;
 
@@ -32,22 +33,25 @@ namespace AcademicService.Infrastructure.Repositories.Abstracts
         {
             if (pageNumber < 1)
             {
-                throw new ArgumentOutOfRangeException(nameof(pageNumber), "Page number must be greater than or equal to 1.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(pageNumber),
+                    "Page number must be greater than or equal to 1."
+                );
             }
 
             if (pageSize < 1)
             {
-                throw new ArgumentOutOfRangeException(nameof(pageSize), "Page size must be greater than or equal to 1.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(pageSize),
+                    "Page size must be greater than or equal to 1."
+                );
             }
 
             var skip = (pageNumber - 1) * pageSize;
 
             var query = _context.Set<T>().Where(x => x.IsActive);
 
-            var entities = await query
-                .Skip(skip)
-                .Take(pageSize)
-                .ToListAsync();
+            var entities = await query.Skip(skip).Take(pageSize).ToListAsync();
 
             return entities;
         }
@@ -59,9 +63,7 @@ namespace AcademicService.Infrastructure.Repositories.Abstracts
                 throw new ArgumentException("The ID cannot be the default value.", nameof(id));
             }
 
-            var entity = await _context
-                .Set<T>()
-                .FirstOrDefaultAsync(r => Equals(r.Id, id));
+            var entity = await _context.Set<T>().FirstOrDefaultAsync(r => Equals(r.Id, id));
 
             if (entity is null)
             {
